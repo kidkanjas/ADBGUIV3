@@ -6,8 +6,8 @@ Public Class Form1
     Private WithEvents MyProcess As Process
     Private Delegate Sub AppendOutputTextDelegate(ByVal text As String)
     Dim serial As String
-    Dim verint As Integer = 34
-    Dim VerString As String = "3.40"
+    Dim verint As Integer = 35
+    Dim VerString As String = "3.41"
     Private Sub ExiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExiToolStripMenuItem.Click
         End
 

@@ -26,6 +26,7 @@ Partial Class Form1
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InstallADBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResetLoginScreenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RootOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -113,7 +114,6 @@ Partial Class Form1
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorker2 = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorker3 = New System.ComponentModel.BackgroundWorker()
-        Me.ResetLoginScreenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -144,7 +144,7 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.AboutToolStripMenuItem, Me.RootOptionsToolStripMenuItem, Me.OToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(658, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(944, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -160,6 +160,12 @@ Partial Class Form1
         Me.InstallADBToolStripMenuItem.Name = "InstallADBToolStripMenuItem"
         Me.InstallADBToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.InstallADBToolStripMenuItem.Text = "Install ADB"
+        '
+        'ResetLoginScreenToolStripMenuItem
+        '
+        Me.ResetLoginScreenToolStripMenuItem.Name = "ResetLoginScreenToolStripMenuItem"
+        Me.ResetLoginScreenToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.ResetLoginScreenToolStripMenuItem.Text = "Reset Login Information"
         '
         'ExiToolStripMenuItem
         '
@@ -225,7 +231,7 @@ Partial Class Form1
         Me.TabControl1.Location = New System.Drawing.Point(12, 27)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(634, 272)
+        Me.TabControl1.Size = New System.Drawing.Size(920, 272)
         Me.TabControl1.TabIndex = 1
         '
         'TabPage1
@@ -237,7 +243,7 @@ Partial Class Form1
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(626, 246)
+        Me.TabPage1.Size = New System.Drawing.Size(912, 246)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Install Applications"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -290,7 +296,7 @@ Partial Class Form1
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(626, 246)
+        Me.TabPage2.Size = New System.Drawing.Size(912, 246)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Basic Commands"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -303,7 +309,7 @@ Partial Class Form1
         Me.GroupBox12.Controls.Add(Me.Button22)
         Me.GroupBox12.Controls.Add(Me.TextBox3)
         Me.GroupBox12.Controls.Add(Me.Button21)
-        Me.GroupBox12.Location = New System.Drawing.Point(192, 125)
+        Me.GroupBox12.Location = New System.Drawing.Point(6, 125)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.Size = New System.Drawing.Size(310, 115)
         Me.GroupBox12.TabIndex = 9
@@ -364,9 +370,9 @@ Partial Class Form1
         'GroupBox11
         '
         Me.GroupBox11.Controls.Add(Me.Button20)
-        Me.GroupBox11.Location = New System.Drawing.Point(100, 125)
+        Me.GroupBox11.Location = New System.Drawing.Point(508, 6)
         Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(86, 115)
+        Me.GroupBox11.Size = New System.Drawing.Size(86, 112)
         Me.GroupBox11.TabIndex = 8
         Me.GroupBox11.TabStop = False
         Me.GroupBox11.Text = "Free RAM"
@@ -383,9 +389,9 @@ Partial Class Form1
         'GroupBox10
         '
         Me.GroupBox10.Controls.Add(Me.Button19)
-        Me.GroupBox10.Location = New System.Drawing.Point(6, 125)
+        Me.GroupBox10.Location = New System.Drawing.Point(600, 6)
         Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(88, 115)
+        Me.GroupBox10.Size = New System.Drawing.Size(88, 112)
         Me.GroupBox10.TabIndex = 7
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Restart ADB"
@@ -402,7 +408,7 @@ Partial Class Form1
         'GroupBox9
         '
         Me.GroupBox9.Controls.Add(Me.Button18)
-        Me.GroupBox9.Location = New System.Drawing.Point(508, 6)
+        Me.GroupBox9.Location = New System.Drawing.Point(818, 6)
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.Size = New System.Drawing.Size(88, 112)
         Me.GroupBox9.TabIndex = 6
@@ -566,7 +572,7 @@ Partial Class Form1
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(626, 246)
+        Me.TabPage3.Size = New System.Drawing.Size(912, 246)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Information"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -635,7 +641,7 @@ Partial Class Form1
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(626, 246)
+        Me.TabPage4.Size = New System.Drawing.Size(912, 246)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Flash"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -726,7 +732,7 @@ Partial Class Form1
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(626, 246)
+        Me.TabPage5.Size = New System.Drawing.Size(912, 246)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "USB"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -769,7 +775,7 @@ Partial Class Form1
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(626, 246)
+        Me.TabPage6.Size = New System.Drawing.Size(912, 246)
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "Developer Mode"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -807,7 +813,7 @@ Partial Class Form1
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(626, 246)
+        Me.TabPage8.Size = New System.Drawing.Size(912, 246)
         Me.TabPage8.TabIndex = 7
         Me.TabPage8.Text = "Samsung Devices"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -841,7 +847,7 @@ Partial Class Form1
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(626, 246)
+        Me.TabPage7.Size = New System.Drawing.Size(912, 246)
         Me.TabPage7.TabIndex = 8
         Me.TabPage7.Text = "ADB/CMD Shell"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -877,7 +883,7 @@ Partial Class Form1
         'Button23
         '
         Me.Button23.Enabled = False
-        Me.Button23.Location = New System.Drawing.Point(545, 218)
+        Me.Button23.Location = New System.Drawing.Point(831, 218)
         Me.Button23.Name = "Button23"
         Me.Button23.Size = New System.Drawing.Size(75, 23)
         Me.Button23.TabIndex = 2
@@ -889,7 +895,7 @@ Partial Class Form1
         Me.TextBox6.Enabled = False
         Me.TextBox6.Location = New System.Drawing.Point(7, 220)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(532, 20)
+        Me.TextBox6.Size = New System.Drawing.Size(818, 20)
         Me.TextBox6.TabIndex = 1
         '
         'TextBox5
@@ -899,7 +905,7 @@ Partial Class Form1
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.ReadOnly = True
         Me.TextBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox5.Size = New System.Drawing.Size(613, 177)
+        Me.TextBox5.Size = New System.Drawing.Size(899, 177)
         Me.TextBox5.TabIndex = 0
         '
         'Label14
@@ -971,17 +977,11 @@ Partial Class Form1
         'BackgroundWorker3
         '
         '
-        'ResetLoginScreenToolStripMenuItem
-        '
-        Me.ResetLoginScreenToolStripMenuItem.Name = "ResetLoginScreenToolStripMenuItem"
-        Me.ResetLoginScreenToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
-        Me.ResetLoginScreenToolStripMenuItem.Text = "Reset Login Information"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(658, 335)
+        Me.ClientSize = New System.Drawing.Size(944, 335)
         Me.Controls.Add(Me.Button14)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label7)
