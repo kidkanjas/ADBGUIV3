@@ -56,7 +56,7 @@ Public Class Form2
         'Me.Hide()
     End Sub
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        'comment for GitHub
         AcceptButton = Button1
         If System.IO.File.Exists("CookComputing.XmlRpcV2.dll") Then
         Else
