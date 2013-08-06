@@ -10,6 +10,10 @@ Public Class Form2
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        TextBox1.Enabled = False
+        TextBox2.Enabled = False
+        Button1.Enabled = False
+
         Try
             If TextBox1.Text = "" Then
                 If MsgBox("You are choosing to continue as a ""Guest""! Continue?", MsgBoxStyle.YesNo, "Message") = MsgBoxResult.Yes Then
@@ -46,11 +50,10 @@ Public Class Form2
 
             End If
         End Try
-        Try
+        TextBox1.Enabled = True
+        TextBox2.Enabled = True
+        Button1.Enabled = True
 
-        Catch ex As Exception
-
-        End Try
 
         'Form1.Show()
         'Me.Hide()
