@@ -98,6 +98,7 @@ Partial Class Form1
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Button16 = New System.Windows.Forms.Button()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.Button27 = New System.Windows.Forms.Button()
         Me.Button26 = New System.Windows.Forms.Button()
         Me.Button25 = New System.Windows.Forms.Button()
         Me.Button24 = New System.Windows.Forms.Button()
@@ -117,6 +118,8 @@ Partial Class Form1
         Me.BackgroundWorker3 = New System.ComponentModel.BackgroundWorker()
         Me.whatbrowser = New System.Windows.Forms.WebBrowser()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.sfd1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -147,7 +150,7 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.AboutToolStripMenuItem, Me.RootOptionsToolStripMenuItem, Me.OToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(944, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(952, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -234,7 +237,7 @@ Partial Class Form1
         Me.TabControl1.Location = New System.Drawing.Point(12, 27)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(920, 272)
+        Me.TabControl1.Size = New System.Drawing.Size(920, 337)
         Me.TabControl1.TabIndex = 1
         '
         'TabPage1
@@ -246,7 +249,7 @@ Partial Class Form1
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(912, 246)
+        Me.TabPage1.Size = New System.Drawing.Size(912, 311)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Install Applications"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -299,7 +302,7 @@ Partial Class Form1
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(655, 246)
+        Me.TabPage2.Size = New System.Drawing.Size(912, 311)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Basic Commands"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -575,7 +578,7 @@ Partial Class Form1
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(655, 246)
+        Me.TabPage3.Size = New System.Drawing.Size(912, 311)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Information"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -644,7 +647,7 @@ Partial Class Form1
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(655, 246)
+        Me.TabPage4.Size = New System.Drawing.Size(912, 311)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Flash"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -672,7 +675,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(255, 7)
+        Me.Label8.Location = New System.Drawing.Point(177, 7)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(177, 13)
         Me.Label8.TabIndex = 5
@@ -735,7 +738,7 @@ Partial Class Form1
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(655, 246)
+        Me.TabPage5.Size = New System.Drawing.Size(912, 311)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "USB"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -743,7 +746,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(370, 58)
+        Me.Label5.Location = New System.Drawing.Point(434, 12)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(177, 13)
         Me.Label5.TabIndex = 2
@@ -778,7 +781,7 @@ Partial Class Form1
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(655, 246)
+        Me.TabPage6.Size = New System.Drawing.Size(912, 311)
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "Developer Mode"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -816,7 +819,7 @@ Partial Class Form1
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(655, 246)
+        Me.TabPage8.Size = New System.Drawing.Size(912, 311)
         Me.TabPage8.TabIndex = 7
         Me.TabPage8.Text = "Samsung Devices"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -841,6 +844,8 @@ Partial Class Form1
         '
         'TabPage7
         '
+        Me.TabPage7.Controls.Add(Me.Label18)
+        Me.TabPage7.Controls.Add(Me.Button27)
         Me.TabPage7.Controls.Add(Me.Button26)
         Me.TabPage7.Controls.Add(Me.Button25)
         Me.TabPage7.Controls.Add(Me.Button24)
@@ -850,10 +855,19 @@ Partial Class Form1
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(655, 246)
+        Me.TabPage7.Size = New System.Drawing.Size(912, 311)
         Me.TabPage7.TabIndex = 8
         Me.TabPage7.Text = "ADB/CMD Shell"
         Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'Button27
+        '
+        Me.Button27.Location = New System.Drawing.Point(271, 6)
+        Me.Button27.Name = "Button27"
+        Me.Button27.Size = New System.Drawing.Size(75, 23)
+        Me.Button27.TabIndex = 6
+        Me.Button27.Text = "Save Output"
+        Me.Button27.UseVisualStyleBackColor = True
         '
         'Button26
         '
@@ -886,7 +900,7 @@ Partial Class Form1
         'Button23
         '
         Me.Button23.Enabled = False
-        Me.Button23.Location = New System.Drawing.Point(831, 218)
+        Me.Button23.Location = New System.Drawing.Point(831, 283)
         Me.Button23.Name = "Button23"
         Me.Button23.Size = New System.Drawing.Size(75, 23)
         Me.Button23.TabIndex = 2
@@ -896,7 +910,7 @@ Partial Class Form1
         'TextBox6
         '
         Me.TextBox6.Enabled = False
-        Me.TextBox6.Location = New System.Drawing.Point(7, 220)
+        Me.TextBox6.Location = New System.Drawing.Point(7, 285)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(818, 20)
         Me.TextBox6.TabIndex = 1
@@ -908,14 +922,14 @@ Partial Class Form1
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.ReadOnly = True
         Me.TextBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox5.Size = New System.Drawing.Size(899, 177)
+        Me.TextBox5.Size = New System.Drawing.Size(899, 242)
         Me.TextBox5.TabIndex = 0
         '
         'Label14
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(373, 308)
+        Me.Label14.Location = New System.Drawing.Point(384, 377)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(76, 16)
         Me.Label14.TabIndex = 13
@@ -924,7 +938,7 @@ Partial Class Form1
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.Android_Helper_GUI.My.Resources.Resources._32
-        Me.PictureBox1.Location = New System.Drawing.Point(337, 301)
+        Me.PictureBox1.Location = New System.Drawing.Point(348, 370)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -947,7 +961,7 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(0, 310)
+        Me.Label6.Location = New System.Drawing.Point(11, 379)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(99, 13)
         Me.Label6.TabIndex = 2
@@ -956,7 +970,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(105, 310)
+        Me.Label7.Location = New System.Drawing.Point(116, 379)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(33, 13)
         Me.Label7.TabIndex = 3
@@ -964,7 +978,7 @@ Partial Class Form1
         '
         'Button14
         '
-        Me.Button14.Location = New System.Drawing.Point(277, 305)
+        Me.Button14.Location = New System.Drawing.Point(288, 374)
         Me.Button14.Name = "Button14"
         Me.Button14.Size = New System.Drawing.Size(54, 23)
         Me.Button14.TabIndex = 4
@@ -994,11 +1008,26 @@ Partial Class Form1
         '
         Me.Timer1.Interval = 10000
         '
+        'sfd1
+        '
+        Me.sfd1.DefaultExt = "txt"
+        Me.sfd1.Filter = "Text File|*.txt"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(352, 11)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(520, 13)
+        Me.Label18.TabIndex = 7
+        Me.Label18.Text = "*Please note: Some commands cannot be ran correctly here. If possible, use the co" & _
+    "mmands tab for functions."
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(944, 335)
+        Me.ClientSize = New System.Drawing.Size(952, 400)
         Me.Controls.Add(Me.Button14)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label7)
@@ -1142,5 +1171,8 @@ Partial Class Form1
     Friend WithEvents ResetLoginScreenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents whatbrowser As System.Windows.Forms.WebBrowser
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents Button27 As System.Windows.Forms.Button
+    Friend WithEvents sfd1 As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents Label18 As System.Windows.Forms.Label
 
 End Class

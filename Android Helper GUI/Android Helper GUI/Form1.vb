@@ -6,8 +6,8 @@ Public Class Form1
     Private WithEvents MyProcess As Process
     Private Delegate Sub AppendOutputTextDelegate(ByVal text As String)
     Dim serial As String
-    Dim verint As Integer = 37
-    Dim VerString As String = "3.4.4"
+    Dim verint As Integer = 38
+    Dim VerString As String = "3.4.5"
     Private Sub ExiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExiToolStripMenuItem.Click
         End
 
@@ -822,5 +822,16 @@ finStart:
         End If
         Dim key As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("AppEvents\Schemes\Apps\Explorer\Navigating\.Current", True)
         key.SetValue(Nothing, keyValue, Microsoft.Win32.RegistryValueKind.ExpandString)
+    End Sub
+
+    Private Sub Button27_Click(sender As Object, e As EventArgs) Handles Button27.Click
+        sfd1.ShowDialog()
+        If sfd1.FileName = "" Then
+
+        Else
+            TextBox5.AppendText("File Saved at: " & DateTime.Now)
+            My.Computer.FileSystem.WriteAllText(sfd1.FileName, TextBox5.Text, False)
+
+        End If
     End Sub
 End Class
