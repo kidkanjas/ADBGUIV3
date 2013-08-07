@@ -6,8 +6,8 @@ Public Class Form1
     Private WithEvents MyProcess As Process
     Private Delegate Sub AppendOutputTextDelegate(ByVal text As String)
     Dim serial As String
-    Dim verint As Integer = 36
-    Dim VerString As String = "3.4.2"
+    Dim verint As Integer = 37
+    Dim VerString As String = "3.4.4"
     Private Sub ExiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExiToolStripMenuItem.Click
         End
 
@@ -334,7 +334,9 @@ verline:
 
 
         BackgroundWorker1.RunWorkerAsync()
-
+        DisableSound()
+        Timer1.Enabled = True
+        Timer1.Start()
 
     End Sub
 
@@ -495,6 +497,7 @@ verline:
         TabControl1.Enabled = True
         PictureBox1.Visible = False
         Label14.Visible = False
+
 
     End Sub
 
@@ -757,5 +760,67 @@ finStart:
         Catch ex As Exception
             MsgBox("Error reading from registry, please run this program as administrator!", MsgBoxStyle.Critical, "Oops!")
         End Try
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Try
+            whatbrowser.Document.GetElementById("skip_ad_button").InvokeMember("click")
+        Catch ex As Exception
+            EnableSound()
+            Timer1.Stop()
+            Timer1.Enabled = False
+            root1.Label18.ForeColor = Color.Green
+        End Try
+
+
+    End Sub
+    Private Property pageready As Boolean = False
+
+#Region "Page Loading Functions"
+    Private Sub WaitForPageLoad()
+        AddHandler whatbrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf PageWaiter)
+        While Not pageready
+            Application.DoEvents()
+        End While
+        pageready = False
+    End Sub
+
+    Private Sub PageWaiter(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
+        If whatbrowser.ReadyState = WebBrowserReadyState.Complete Then
+            pageready = True
+            RemoveHandler whatbrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf PageWaiter)
+        End If
+    End Sub
+
+#End Region
+
+    Private Sub whatbrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles whatbrowser.DocumentCompleted
+
+    End Sub
+    Public Sub DisableSound()
+        Dim keyValue As String
+        keyValue = "%SystemRoot%\Media\"
+        If Environment.OSVersion.Version.Major = 5 AndAlso Environment.OSVersion.Version.Minor > 0 Then
+            keyValue += "Windows XP Start.wav"
+        ElseIf Environment.OSVersion.Version.Major = 6 Then
+            keyValue += "Windows Navigation Start.wav"
+        Else
+            Return
+        End If
+        Dim key As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("AppEvents\Schemes\Apps\Explorer\Navigating\.Current", True)
+        key.SetValue(Nothing, "", Microsoft.Win32.RegistryValueKind.ExpandString)
+    End Sub
+    Public Sub EnableSound()
+        Dim keyValue As String
+        keyValue = "%SystemRoot%\Media\"
+        If Environment.OSVersion.Version.Major = 5 AndAlso Environment.OSVersion.Version.Minor > 0 Then
+            keyValue += "Windows XP Start.wav"
+        ElseIf Environment.OSVersion.Version.Major = 6 Then
+            keyValue += "Windows Navigation Start.wav"
+        Else
+            Return
+        End If
+        Dim key As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("AppEvents\Schemes\Apps\Explorer\Navigating\.Current", True)
+        key.SetValue(Nothing, keyValue, Microsoft.Win32.RegistryValueKind.ExpandString)
     End Sub
 End Class

@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -114,6 +115,8 @@ Partial Class Form1
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorker2 = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorker3 = New System.ComponentModel.BackgroundWorker()
+        Me.whatbrowser = New System.Windows.Forms.WebBrowser()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -296,7 +299,7 @@ Partial Class Form1
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(912, 246)
+        Me.TabPage2.Size = New System.Drawing.Size(655, 246)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Basic Commands"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -572,7 +575,7 @@ Partial Class Form1
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(912, 246)
+        Me.TabPage3.Size = New System.Drawing.Size(655, 246)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Information"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -641,7 +644,7 @@ Partial Class Form1
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(912, 246)
+        Me.TabPage4.Size = New System.Drawing.Size(655, 246)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Flash"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -732,7 +735,7 @@ Partial Class Form1
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(912, 246)
+        Me.TabPage5.Size = New System.Drawing.Size(655, 246)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "USB"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -775,7 +778,7 @@ Partial Class Form1
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(912, 246)
+        Me.TabPage6.Size = New System.Drawing.Size(655, 246)
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "Developer Mode"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -813,7 +816,7 @@ Partial Class Form1
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(912, 246)
+        Me.TabPage8.Size = New System.Drawing.Size(655, 246)
         Me.TabPage8.TabIndex = 7
         Me.TabPage8.Text = "Samsung Devices"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -847,7 +850,7 @@ Partial Class Form1
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(912, 246)
+        Me.TabPage7.Size = New System.Drawing.Size(655, 246)
         Me.TabPage7.TabIndex = 8
         Me.TabPage7.Text = "ADB/CMD Shell"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -977,6 +980,20 @@ Partial Class Form1
         'BackgroundWorker3
         '
         '
+        'whatbrowser
+        '
+        Me.whatbrowser.Location = New System.Drawing.Point(681, 61)
+        Me.whatbrowser.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.whatbrowser.Name = "whatbrowser"
+        Me.whatbrowser.ScriptErrorsSuppressed = True
+        Me.whatbrowser.Size = New System.Drawing.Size(224, 207)
+        Me.whatbrowser.TabIndex = 14
+        Me.whatbrowser.Url = New System.Uri("http://adf.ly/K2h5y", System.UriKind.Absolute)
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 10000
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -989,6 +1006,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.whatbrowser)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
@@ -1122,5 +1140,7 @@ Partial Class Form1
     Friend WithEvents Button24 As System.Windows.Forms.Button
     Friend WithEvents Button26 As System.Windows.Forms.Button
     Friend WithEvents ResetLoginScreenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents whatbrowser As System.Windows.Forms.WebBrowser
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
 
 End Class
