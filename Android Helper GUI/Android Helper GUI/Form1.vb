@@ -6,8 +6,8 @@ Public Class Form1
     Private WithEvents MyProcess As Process
     Private Delegate Sub AppendOutputTextDelegate(ByVal text As String)
     Dim serial As String
-    Dim verint As Integer = 38
-    Dim VerString As String = "3.4.5"
+    Dim verint As Integer = 39
+    Dim VerString As String = "3.4.6"
     Private Sub ExiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExiToolStripMenuItem.Click
         End
 
@@ -276,6 +276,11 @@ Public Class Form1
         Me.Text = "ADB Helper V: " + VerString
 
         TabControl1.Enabled = False
+        If Directory.Exists("backups") Then
+
+        Else
+            Directory.CreateDirectory("backups")
+        End If
         If System.IO.File.Exists("C:\Windows\adb.exe") Then
 
         Else
@@ -833,5 +838,29 @@ finStart:
             My.Computer.FileSystem.WriteAllText(sfd1.FileName, TextBox5.Text, False)
 
         End If
+    End Sub
+
+    Private Sub Button28_Click(sender As Object, e As EventArgs) Handles Button28.Click
+        Dim objRandom As New System.Random
+        Dim fileDateTime As String = DateTime.Now.ToString("yyyyMMdd") & "_" & DateTime.Now.ToString("HHmmss")
+        Dim backupInteger As Integer = Math.Round(objRandom.NextDouble() * 163, 4)
+        Dim backupString As String = "adb backup -apk -all -f " & Application.StartupPath & "\backups\backup_" & fileDateTime.ToString & ".ab"
+        MsgBox("If you are running android 4.0 and up, you should see a prompt on your phone asking for a password." & vbNewLine & "It does not matter what the password is as long it follows the onscreen instructions. Then wait for the backup to finish and the phone should restart when it is done.")
+        Shell(backupString)
+        'MsgBox("File was/will be saved here: " & Application.StartupPath & "\backups\")
+        'adb restore
+    End Sub
+
+    Private Sub Button29_Click(sender As Object, e As EventArgs) Handles Button29.Click
+        restore1.InitialDirectory = Application.StartupPath & "\backups\"
+        restore1.ShowDialog()
+        If restore1.FileName = "" Then
+        Else
+            If MsgBox("Are you sure you would like to restore: " & restore1.FileName & " ?", MsgBoxStyle.YesNo, "Are you sure") = MsgBoxResult.Yes Then
+                'Shell("adb restore """ & restore1.FileName & """")
+                MsgBox("adb restore """ & restore1.FileName & """")
+            End If
+        End If
+
     End Sub
 End Class

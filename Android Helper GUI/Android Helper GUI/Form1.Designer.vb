@@ -98,6 +98,7 @@ Partial Class Form1
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Button16 = New System.Windows.Forms.Button()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.Button27 = New System.Windows.Forms.Button()
         Me.Button26 = New System.Windows.Forms.Button()
         Me.Button25 = New System.Windows.Forms.Button()
@@ -119,7 +120,13 @@ Partial Class Form1
         Me.whatbrowser = New System.Windows.Forms.WebBrowser()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.sfd1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label18 = New System.Windows.Forms.Label()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.Button28 = New System.Windows.Forms.Button()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+        Me.Button29 = New System.Windows.Forms.Button()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.restore1 = New System.Windows.Forms.OpenFileDialog()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -143,6 +150,8 @@ Partial Class Form1
         Me.TabPage8.SuspendLayout()
         Me.TabPage7.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox13.SuspendLayout()
+        Me.GroupBox14.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -290,6 +299,8 @@ Partial Class Form1
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.GroupBox14)
+        Me.TabPage2.Controls.Add(Me.GroupBox13)
         Me.TabPage2.Controls.Add(Me.GroupBox12)
         Me.TabPage2.Controls.Add(Me.GroupBox11)
         Me.TabPage2.Controls.Add(Me.GroupBox10)
@@ -860,6 +871,16 @@ Partial Class Form1
         Me.TabPage7.Text = "ADB/CMD Shell"
         Me.TabPage7.UseVisualStyleBackColor = True
         '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(352, 11)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(520, 13)
+        Me.Label18.TabIndex = 7
+        Me.Label18.Text = "*Please note: Some commands cannot be ran correctly here. If possible, use the co" & _
+    "mmands tab for functions."
+        '
         'Button27
         '
         Me.Button27.Location = New System.Drawing.Point(271, 6)
@@ -1013,15 +1034,68 @@ Partial Class Form1
         Me.sfd1.DefaultExt = "txt"
         Me.sfd1.Filter = "Text File|*.txt"
         '
-        'Label18
+        'GroupBox13
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(352, 11)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(520, 13)
-        Me.Label18.TabIndex = 7
-        Me.Label18.Text = "*Please note: Some commands cannot be ran correctly here. If possible, use the co" & _
-    "mmands tab for functions."
+        Me.GroupBox13.Controls.Add(Me.Label19)
+        Me.GroupBox13.Controls.Add(Me.Button28)
+        Me.GroupBox13.Location = New System.Drawing.Point(323, 125)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.Size = New System.Drawing.Size(179, 115)
+        Me.GroupBox13.TabIndex = 10
+        Me.GroupBox13.TabStop = False
+        Me.GroupBox13.Text = "Backup phone (4.0+)"
+        '
+        'Button28
+        '
+        Me.Button28.Location = New System.Drawing.Point(16, 19)
+        Me.Button28.Name = "Button28"
+        Me.Button28.Size = New System.Drawing.Size(149, 23)
+        Me.Button28.TabIndex = 0
+        Me.Button28.Text = "Start Backup"
+        Me.Button28.UseVisualStyleBackColor = True
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(13, 49)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(136, 13)
+        Me.Label19.TabIndex = 1
+        Me.Label19.Text = "*Android 4.0 and up ONLY!"
+        '
+        'GroupBox14
+        '
+        Me.GroupBox14.Controls.Add(Me.Label20)
+        Me.GroupBox14.Controls.Add(Me.Button29)
+        Me.GroupBox14.Location = New System.Drawing.Point(508, 125)
+        Me.GroupBox14.Name = "GroupBox14"
+        Me.GroupBox14.Size = New System.Drawing.Size(180, 115)
+        Me.GroupBox14.TabIndex = 11
+        Me.GroupBox14.TabStop = False
+        Me.GroupBox14.Text = "Restore phone (4.0+)"
+        '
+        'Button29
+        '
+        Me.Button29.Location = New System.Drawing.Point(16, 19)
+        Me.Button29.Name = "Button29"
+        Me.Button29.Size = New System.Drawing.Size(149, 23)
+        Me.Button29.TabIndex = 1
+        Me.Button29.Text = "Start Restore"
+        Me.Button29.UseVisualStyleBackColor = True
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(13, 49)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(136, 13)
+        Me.Label20.TabIndex = 2
+        Me.Label20.Text = "*Android 4.0 and up ONLY!"
+        '
+        'restore1
+        '
+        Me.restore1.FileName = "*.ab"
+        Me.restore1.Filter = "Android Backup File|*.ab"
         '
         'Form1
         '
@@ -1074,6 +1148,10 @@ Partial Class Form1
         Me.TabPage7.ResumeLayout(False)
         Me.TabPage7.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox13.ResumeLayout(False)
+        Me.GroupBox13.PerformLayout()
+        Me.GroupBox14.ResumeLayout(False)
+        Me.GroupBox14.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1174,5 +1252,12 @@ Partial Class Form1
     Friend WithEvents Button27 As System.Windows.Forms.Button
     Friend WithEvents sfd1 As System.Windows.Forms.SaveFileDialog
     Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox13 As System.Windows.Forms.GroupBox
+    Friend WithEvents Button28 As System.Windows.Forms.Button
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox14 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents Button29 As System.Windows.Forms.Button
+    Friend WithEvents restore1 As System.Windows.Forms.OpenFileDialog
 
 End Class
