@@ -43,6 +43,12 @@ Partial Class Form1
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Button29 = New System.Windows.Forms.Button()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Button28 = New System.Windows.Forms.Button()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -120,17 +126,13 @@ Partial Class Form1
         Me.whatbrowser = New System.Windows.Forms.WebBrowser()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.sfd1 = New System.Windows.Forms.SaveFileDialog()
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.Button28 = New System.Windows.Forms.Button()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.GroupBox14 = New System.Windows.Forms.GroupBox()
-        Me.Button29 = New System.Windows.Forms.Button()
-        Me.Label20 = New System.Windows.Forms.Label()
         Me.restore1 = New System.Windows.Forms.OpenFileDialog()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.GroupBox14.SuspendLayout()
+        Me.GroupBox13.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -150,8 +152,6 @@ Partial Class Form1
         Me.TabPage8.SuspendLayout()
         Me.TabPage7.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox13.SuspendLayout()
-        Me.GroupBox14.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -317,6 +317,64 @@ Partial Class Form1
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Basic Commands"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'GroupBox14
+        '
+        Me.GroupBox14.Controls.Add(Me.Label20)
+        Me.GroupBox14.Controls.Add(Me.Button29)
+        Me.GroupBox14.Location = New System.Drawing.Point(508, 125)
+        Me.GroupBox14.Name = "GroupBox14"
+        Me.GroupBox14.Size = New System.Drawing.Size(180, 115)
+        Me.GroupBox14.TabIndex = 11
+        Me.GroupBox14.TabStop = False
+        Me.GroupBox14.Text = "Restore phone (4.0+)"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(13, 49)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(136, 13)
+        Me.Label20.TabIndex = 2
+        Me.Label20.Text = "*Android 4.0 and up ONLY!"
+        '
+        'Button29
+        '
+        Me.Button29.Location = New System.Drawing.Point(16, 19)
+        Me.Button29.Name = "Button29"
+        Me.Button29.Size = New System.Drawing.Size(149, 23)
+        Me.Button29.TabIndex = 1
+        Me.Button29.Text = "Start Restore"
+        Me.Button29.UseVisualStyleBackColor = True
+        '
+        'GroupBox13
+        '
+        Me.GroupBox13.Controls.Add(Me.Label19)
+        Me.GroupBox13.Controls.Add(Me.Button28)
+        Me.GroupBox13.Location = New System.Drawing.Point(323, 125)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.Size = New System.Drawing.Size(179, 115)
+        Me.GroupBox13.TabIndex = 10
+        Me.GroupBox13.TabStop = False
+        Me.GroupBox13.Text = "Backup phone (4.0+)"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(13, 49)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(136, 13)
+        Me.Label19.TabIndex = 1
+        Me.Label19.Text = "*Android 4.0 and up ONLY!"
+        '
+        'Button28
+        '
+        Me.Button28.Location = New System.Drawing.Point(16, 19)
+        Me.Button28.Name = "Button28"
+        Me.Button28.Size = New System.Drawing.Size(149, 23)
+        Me.Button28.TabIndex = 0
+        Me.Button28.Text = "Start Backup"
+        Me.Button28.UseVisualStyleBackColor = True
         '
         'GroupBox12
         '
@@ -1014,6 +1072,7 @@ Partial Class Form1
         '
         'BackgroundWorker3
         '
+        Me.BackgroundWorker3.WorkerSupportsCancellation = True
         '
         'whatbrowser
         '
@@ -1033,64 +1092,6 @@ Partial Class Form1
         '
         Me.sfd1.DefaultExt = "txt"
         Me.sfd1.Filter = "Text File|*.txt"
-        '
-        'GroupBox13
-        '
-        Me.GroupBox13.Controls.Add(Me.Label19)
-        Me.GroupBox13.Controls.Add(Me.Button28)
-        Me.GroupBox13.Location = New System.Drawing.Point(323, 125)
-        Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(179, 115)
-        Me.GroupBox13.TabIndex = 10
-        Me.GroupBox13.TabStop = False
-        Me.GroupBox13.Text = "Backup phone (4.0+)"
-        '
-        'Button28
-        '
-        Me.Button28.Location = New System.Drawing.Point(16, 19)
-        Me.Button28.Name = "Button28"
-        Me.Button28.Size = New System.Drawing.Size(149, 23)
-        Me.Button28.TabIndex = 0
-        Me.Button28.Text = "Start Backup"
-        Me.Button28.UseVisualStyleBackColor = True
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(13, 49)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(136, 13)
-        Me.Label19.TabIndex = 1
-        Me.Label19.Text = "*Android 4.0 and up ONLY!"
-        '
-        'GroupBox14
-        '
-        Me.GroupBox14.Controls.Add(Me.Label20)
-        Me.GroupBox14.Controls.Add(Me.Button29)
-        Me.GroupBox14.Location = New System.Drawing.Point(508, 125)
-        Me.GroupBox14.Name = "GroupBox14"
-        Me.GroupBox14.Size = New System.Drawing.Size(180, 115)
-        Me.GroupBox14.TabIndex = 11
-        Me.GroupBox14.TabStop = False
-        Me.GroupBox14.Text = "Restore phone (4.0+)"
-        '
-        'Button29
-        '
-        Me.Button29.Location = New System.Drawing.Point(16, 19)
-        Me.Button29.Name = "Button29"
-        Me.Button29.Size = New System.Drawing.Size(149, 23)
-        Me.Button29.TabIndex = 1
-        Me.Button29.Text = "Start Restore"
-        Me.Button29.UseVisualStyleBackColor = True
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(13, 49)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(136, 13)
-        Me.Label20.TabIndex = 2
-        Me.Label20.Text = "*Android 4.0 and up ONLY!"
         '
         'restore1
         '
@@ -1122,6 +1123,10 @@ Partial Class Form1
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
+        Me.GroupBox14.ResumeLayout(False)
+        Me.GroupBox14.PerformLayout()
+        Me.GroupBox13.ResumeLayout(False)
+        Me.GroupBox13.PerformLayout()
         Me.GroupBox12.ResumeLayout(False)
         Me.GroupBox12.PerformLayout()
         Me.GroupBox11.ResumeLayout(False)
@@ -1148,10 +1153,6 @@ Partial Class Form1
         Me.TabPage7.ResumeLayout(False)
         Me.TabPage7.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox13.ResumeLayout(False)
-        Me.GroupBox13.PerformLayout()
-        Me.GroupBox14.ResumeLayout(False)
-        Me.GroupBox14.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

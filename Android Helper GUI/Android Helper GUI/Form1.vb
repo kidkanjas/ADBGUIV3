@@ -1,13 +1,16 @@
 ﻿Imports RegawMOD.Android
 Imports System.IO
+Imports System.Management
+Imports System.Runtime.InteropServices
 Public Class Form1
     Dim android As AndroidController
     Dim device As Device
     Private WithEvents MyProcess As Process
     Private Delegate Sub AppendOutputTextDelegate(ByVal text As String)
+    Private WithEvents m_MediaConnectWatcher As ManagementEventWatcher
     Dim serial As String
-    Dim verint As Integer = 39
-    Dim VerString As String = "3.4.6"
+    Dim verint As Integer = 40
+    Dim VerString As String = "3.4.7"
     Private Sub ExiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExiToolStripMenuItem.Click
         End
 
@@ -267,10 +270,13 @@ Public Class Form1
         USBID()
     End Sub
 
+    Private Sub Form1_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+
+    End Sub
+
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         End
     End Sub
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
         Me.Text = "ADB Helper V: " + VerString
@@ -342,11 +348,41 @@ verline:
         DisableSound()
         Timer1.Enabled = True
         Timer1.Start()
-
+        StartDetection()
     End Sub
+    Public Sub StartDetection()
+        ' __InstanceOperationEvent will trap both Creation and Deletion of class instances
+        Dim query2 As String = "SELECT * FROM __InstanceOperationEvent WITHIN 10 WHERE TargetInstance ISA ""Win32_USBControllerDevice"""
+        m_MediaConnectWatcher = New ManagementEventWatcher(query2)
+        m_MediaConnectWatcher.Start()
+    End Sub
+    Private Sub Arrived(ByVal sender As Object, ByVal e As System.Management.EventArrivedEventArgs) Handles m_MediaConnectWatcher.EventArrived
 
+        Dim mbo, obj As ManagementBaseObject
+
+        'is  it a creation or deletion event
+        mbo = CType(e.NewEvent, ManagementBaseObject)
+        ' is it either created or deleted
+        obj = CType(mbo("TargetInstance"), ManagementBaseObject)
+
+        Select Case mbo.ClassPath.ClassName
+            Case "__InstanceCreationEvent"
+                Button14.PerformClick()
+
+
+        End Select
+    End Sub
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
-        BackgroundWorker3.RunWorkerAsync()
+        If BackgroundWorker3.IsBusy = True Then
+            'android.Dispose()
+            'BackgroundWorker3.CancelAsync()
+            'PictureBox1.Visible = False
+            'Label14.Visible = False
+            'BackgroundWorker3.RunWorkerAsync()
+        Else
+            BackgroundWorker3.RunWorkerAsync()
+        End If
+
 
     End Sub
 
@@ -421,6 +457,7 @@ verline:
 
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
         Try
+            Button14.Enabled = False
             Label14.Text = "Checking for a connected device..."
             android = AndroidController.Instance
             android.UpdateDeviceList()
@@ -469,7 +506,7 @@ verline:
         Catch ex As Exception
             MsgBox("There has been an error communicating to the device. A possible fix is rebooting the PC.", MsgBoxStyle.Exclamation, "Oops!")
         End Try
-
+        Button14.Enabled = True
        
     End Sub
 
@@ -507,6 +544,7 @@ verline:
     End Sub
 
     Private Sub BackgroundWorker3_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker3.DoWork
+        Button14.Enabled = False
         PictureBox1.Visible = True
         Label14.Text = "Checking for a connected device..."
         Label14.Visible = True
@@ -555,6 +593,7 @@ verline:
         Label14.Text = "Finished Loading Resources!"
         PictureBox1.Visible = False
         Label14.Visible = False
+        Button14.Enabled = True
     End Sub
 
     Private Sub MyAndroidApplicationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MyAndroidApplicationsToolStripMenuItem.Click
