@@ -9,8 +9,8 @@ Public Class Form1
     Private Delegate Sub AppendOutputTextDelegate(ByVal text As String)
     Private WithEvents m_MediaConnectWatcher As ManagementEventWatcher
     Dim serial As String
-    Dim verint As Integer = 40
-    Dim VerString As String = "3.4.7"
+    Dim verint As Integer = 41
+    Dim VerString As String = "3.5.1"
     Private Sub ExiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExiToolStripMenuItem.Click
         End
 
@@ -28,12 +28,20 @@ Public Class Form1
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim p As New ProcessStartInfo
+        If ofd1.FileName = "" Then
+            GoTo endInstall
+        ElseIf ofd1.FileName = Nothing Then
+            GoTo endInstall
+        ElseIf File.Exists(ofd1.FileName) = False Then
+            MsgBox("File cannot be accessed at this time! (Either it does not exsist or is open in another process.)", MsgBoxStyle.Exclamation, "Oops!")
+            GoTo endInstall
+        End If
         p.FileName = "adb.exe"
         Dim arg As String = ofd1.FileName
         p.Arguments = "install " + arg
         p.WindowStyle = ProcessWindowStyle.Normal
         Process.Start(p)
-
+endInstall:
     End Sub
 
     Private Sub InstallADBToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InstallADBToolStripMenuItem.Click
@@ -166,8 +174,13 @@ Public Class Form1
     End Sub
 
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
-        ofd2.ShowDialog()
+        If ofd2.ShowDialog() = Windows.Forms.DialogResult.Cancel Then
+            GoTo endFlash1
+        End If
         Dim rec1 As String = ofd2.FileName
+        If ofd2.FileName = "" Then
+            GoTo endFlash1
+        End If
         Try
             Dim p As New ProcessStartInfo
             p.FileName = "adb.exe"
@@ -188,11 +201,18 @@ Public Class Form1
             MsgBox("Possible Error has occured while trying to flash recovery." + ex.ToString + " Please send the error code to Me at urgero.org/ticket", MsgBoxStyle.Exclamation, "Error has occured")
 
         End Try
+endFlash1:
+
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
-        ofd3.ShowDialog()
+        If ofd3.ShowDialog() = Windows.Forms.DialogResult.Cancel Then
+            GoTo endFlash2
+        End If
         Dim rec1 As String = ofd3.FileName
+        If ofd3.FileName = "" Then
+            GoTo endFlash2
+        End If
         Try
             Dim p As New ProcessStartInfo
             p.FileName = "adb.exe"
@@ -212,6 +232,8 @@ Public Class Form1
             MsgBox("Possible Error has occured while trying to flash recovery." + ex.ToString + " Please send the error code to Me at urgero.org/ticket", MsgBoxStyle.Exclamation, "Error has occured")
 
         End Try
+endFlash2:
+
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
