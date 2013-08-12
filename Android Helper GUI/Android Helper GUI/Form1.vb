@@ -6,11 +6,13 @@ Public Class Form1
     Dim android As AndroidController
     Dim device As Device
     Private WithEvents MyProcess As Process
+    Private WithEvents MyProcess2 As Process
     Private Delegate Sub AppendOutputTextDelegate(ByVal text As String)
+    Private Delegate Sub AppendOutputText2Delegate(ByVal text As String)
     Private WithEvents m_MediaConnectWatcher As ManagementEventWatcher
     Dim serial As String
-    Dim verint As Integer = 41
-    Dim VerString As String = "3.5.1"
+    Dim verint As Integer = 42
+    Dim VerString As String = "3.5.2"
     Private Sub ExiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExiToolStripMenuItem.Click
         End
 
@@ -36,11 +38,23 @@ Public Class Form1
             MsgBox("File cannot be accessed at this time! (Either it does not exsist or is open in another process.)", MsgBoxStyle.Exclamation, "Oops!")
             GoTo endInstall
         End If
-        p.FileName = "adb.exe"
-        Dim arg As String = ofd1.FileName
-        p.Arguments = "install " + arg
-        p.WindowStyle = ProcessWindowStyle.Normal
-        Process.Start(p)
+        Try
+            Button2.Enabled = False
+            'PictureBox9.Visible = True
+            'Label30.Visible = True
+            device.InstallApk(ofd1.FileName)
+            MsgBox("Finished with the installation!, you should now find the application on your device!", MsgBoxStyle.Exclamation, "Yay!")
+        Catch ex As Exception
+            MsgBox("There has been an error while trying to install this apk to the android device!", MsgBoxStyle.Exclamation, "Oops!")
+        End Try
+        Button2.Enabled = True
+        PictureBox9.Visible = False
+        Label30.Visible = False
+        'p.FileName = "adb.exe"
+        'Dim arg As String = ofd1.FileName
+        'p.Arguments = "install " + arg
+        'p.WindowStyle = ProcessWindowStyle.Normal
+        'Process.Start(p)
 endInstall:
     End Sub
 
@@ -293,7 +307,11 @@ endFlash2:
     End Sub
 
     Private Sub Form1_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        Try
+            android.Dispose()
+        Catch ex As Exception
 
+        End Try
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -367,10 +385,63 @@ verline:
 
 
         BackgroundWorker1.RunWorkerAsync()
+
         DisableSound()
         Timer1.Enabled = True
         Timer1.Start()
         StartDetection()
+    End Sub
+    Public Sub StartLogcat()
+        Try
+            If Label7.Text = "No Device Found!" Then
+                GoTo badLine2
+            Else
+
+            End If
+            If Label7.Text = "No Devices Found!" Then
+                GoTo badLine2
+            Else
+
+            End If
+            If File.Exists("C:\Windows\adb.exe") = True Then
+                GoTo startLine
+            Else
+                GoTo badLine
+            End If
+startLine:
+
+
+            MyProcess2 = New Process
+
+            With MyProcess2.StartInfo
+                .FileName = "cmd"
+                ' .Arguments = "SHELL"
+                .UseShellExecute = False
+                .CreateNoWindow = True
+                .RedirectStandardInput = True
+                .RedirectStandardOutput = True
+                .RedirectStandardError = True
+            End With
+
+            MyProcess2.Start()
+
+            MyProcess2.BeginErrorReadLine()      'start async read on stderr
+            MyProcess2.BeginOutputReadLine()     'start async read on stdout
+            MyProcess2.StandardInput.WriteLine("adb logcat") 'send an EXIT command to the Command Prompt
+            MyProcess2.StandardInput.Flush()
+            AppendOutputText2("Process Started at: " & MyProcess2.StartTime.ToString)
+
+            GoTo finStart
+badLine:
+            AppendOutputText2("Please make sure ADB is installed to the system dir!" + vbNewLine)
+            GoTo finStart
+
+badLine2:
+            AppendOutputText2("An android device needs to be connected first!" + vbNewLine)
+finStart:
+        Catch ex As Exception
+            MsgBox("Error starting ADB SHELL!!", MsgBoxStyle.Critical, "Oops!")
+        End Try
     End Sub
     Public Sub StartDetection()
         ' __InstanceOperationEvent will trap both Creation and Deletion of class instances
@@ -476,8 +547,16 @@ verline:
         'esfv.Show()
         explorer.Show()
     End Sub
-
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        Try
+            TextBox7.Clear()
+            MyProcess2.Kill()
+            MyProcess2.Dispose()
+
+        Catch ex As Exception
+            GoTo continue1
+        End Try
+continue1:
         Try
             Button14.Enabled = False
             Label14.Text = "Checking for a connected device..."
@@ -507,29 +586,46 @@ verline:
 
                 Label7.Text = serial.ToUpper
                 Label7.Text.ToUpper()
-                android.Dispose()
+
             Else
                 ' MsgBox("No device found! Drivers may need to be installed first, or the device is not plugged in!", MsgBoxStyle.Critical, "Device not found!")
                 Label7.Text = "No Devices Found!"
+                Label29.Text = "No Devies Connected!"
             End If
-            Try
-                android.Dispose()
-            Catch ex As Exception
 
-            End Try
             If Label7.Text = "No Devices Found!" Then
                 Label9.Text = "No devices connected!"
                 Label10.Text = ""
                 Label11.Text = ""
                 Label12.Text = ""
                 Label15.Text = ""
+            Else
+
             End If
-            BackgroundWorker2.RunWorkerAsync()
+            Try
+                If android.HasConnectedDevices Then
+                    serial = android.ConnectedDevices(0)
+                    device = android.GetConnectedDevice(serial)
+
+                    'Adds all of the build.prop keys to the listbox
+                    ListBox2.Items.AddRange(device.BuildProp.Keys.ToArray)
+
+                    'So no items are selected right away
+                    ListBox2.SelectedIndex = -1
+                Else
+                    Label29.Text = "No Devies Connected, or an error occured while reading the build.prop file."
+                End If
+            Catch ex As Exception
+
+            End Try
+
+
         Catch ex As Exception
-            MsgBox("There has been an error communicating to the device. A possible fix is rebooting the PC.", MsgBoxStyle.Exclamation, "Oops!")
+            MsgBox("There has been an error communicating to the device. Here are a couple ways to troubleshoot the issue:" & vbNewLine & "1. Check the usb connection, unplug and plug back in the device." & vbNewLine & "2. Restarting the PC may solve the issue directly." & vbNewLine & "3. Make sure you have the correct drivers for your phone, and your version of windows. " & vbNewLine & "NOTE: Sometimes this error comes up because of a bug with android itself, if you see a serial number in the bottom left hand corner of the program, this error MAY be ignored, but take caution. Just because a serial number is there does not always mean that all the commands in this program will work. This error did come up for a reason.", MsgBoxStyle.Exclamation, "Oops!")
         End Try
         Button14.Enabled = True
-       
+        BackgroundWorker2.RunWorkerAsync()
+        StartLogcat()
     End Sub
 
     Private Sub BackgroundWorker2_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker2.DoWork
@@ -566,6 +662,15 @@ verline:
     End Sub
 
     Private Sub BackgroundWorker3_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker3.DoWork
+        Try
+            TextBox7.Clear()
+            MyProcess2.Kill()
+            MyProcess2.Dispose()
+
+        Catch ex As Exception
+            GoTo continue1
+        End Try
+continue1:
         Button14.Enabled = False
         PictureBox1.Visible = True
         Label14.Text = "Checking for a connected device..."
@@ -595,27 +700,43 @@ verline:
                 MsgBox("Connected device has been detected in recovery mode! Some commands may not work!", MsgBoxStyle.Critical, "Recovery Detected!")
 
             End If
-            android.Dispose()
+            Try
+                If android.HasConnectedDevices Then
+                    serial = android.ConnectedDevices(0)
+                    device = android.GetConnectedDevice(serial)
+
+                    'Adds all of the build.prop keys to the listbox
+                    ListBox2.Items.AddRange(device.BuildProp.Keys.ToArray)
+
+                    'So no items are selected right away
+                    ListBox2.SelectedIndex = -1
+                Else
+                    Label29.Text = "No Devies Connected, or an error occured while reading the build.prop file."
+                End If
+            Catch ex As Exception
+
+            End Try
+
         Else
             'MsgBox("No device found! Drivers may need to be installed first, or the device is not plugged in!", MsgBoxStyle.Critical, "Device not found!")
-            Label7.Text = "No Device Found!"
+            Label7.Text = "No Devices Found!"
+            Label29.Text = "No Devies Connected!"
         End If
-        Try
-            android.Dispose()
-        Catch ex As Exception
 
-        End Try
         If Label7.Text = "No Devices Found!" Then
             Label9.Text = "No devices connected!"
             Label10.Text = ""
             Label11.Text = ""
             Label12.Text = ""
             Label15.Text = ""
+        Else
+
         End If
         Label14.Text = "Finished Loading Resources!"
         PictureBox1.Visible = False
         Label14.Visible = False
         Button14.Enabled = True
+        StartLogcat()
     End Sub
 
     Private Sub MyAndroidApplicationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MyAndroidApplicationsToolStripMenuItem.Click
@@ -716,6 +837,26 @@ finStart:
             Catch ex As Exception
                 MsgBox("Error starting ADB SHELL!!", MsgBoxStyle.Critical, "Oops!")
             End Try
+
+    End Sub
+    Private Sub AppendOutputText2(ByVal text As String)
+
+        If TextBox7.InvokeRequired Then
+            Dim myDelegate As New AppendOutputText2Delegate(AddressOf AppendOutputText2)
+            Me.Invoke(myDelegate, text)
+        Else
+            TextBox7.AppendText(text)
+        End If
+
+    End Sub
+    Private Sub MyProcess2_OutputDataReceived(ByVal sender As Object, ByVal e As System.Diagnostics.DataReceivedEventArgs) Handles MyProcess2.OutputDataReceived
+
+        AppendOutputText2(vbCrLf & e.Data)
+
+    End Sub
+    Private Sub MyProcess2_ErrorDataReceived(ByVal sender As Object, ByVal e As System.Diagnostics.DataReceivedEventArgs) Handles MyProcess2.ErrorDataReceived
+
+        AppendOutputText2(vbCrLf & e.Data)
 
     End Sub
     Private Sub AppendOutputText(ByVal text As String)
@@ -923,5 +1064,90 @@ finStart:
             End If
         End If
 
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+        Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RKWA3MZANRADC")
+    End Sub
+
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RKWA3MZANRADC")
+    End Sub
+
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RKWA3MZANRADC")
+    End Sub
+
+    Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
+        Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RKWA3MZANRADC")
+    End Sub
+
+    Private Sub PictureBox6_Click(sender As Object, e As EventArgs) Handles PictureBox6.Click
+        Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RKWA3MZANRADC")
+    End Sub
+
+    Private Sub PictureBox7_Click(sender As Object, e As EventArgs) Handles PictureBox7.Click
+        Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RKWA3MZANRADC")
+    End Sub
+
+    Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
+        Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RKWA3MZANRADC")
+    End Sub
+
+    Private Sub ListBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox2.SelectedIndexChanged
+        Label29.Text = device.BuildProp.GetProp(ListBox2.SelectedItem.ToString())
+    End Sub
+
+    Private Sub Button30_Click(sender As Object, e As EventArgs) Handles Button30.Click
+        Dim p As New ProcessStartInfo
+        If ofd1.FileName = "" Then
+            GoTo endInstall
+        ElseIf ofd1.FileName = Nothing Then
+            GoTo endInstall
+        ElseIf File.Exists(ofd1.FileName) = False Then
+            MsgBox("File cannot be accessed at this time! (Either it does not exsist or is open in another process.)", MsgBoxStyle.Exclamation, "Oops!")
+            GoTo endInstall
+        End If
+        MsgBox("With this method we have opened up a new window in the background to install the apk file. If it is still open you will find it in the task bar." & vbNewLine & "This method should work if the above will fail. the only down fall is there is no confirmation of installation or failure.", MsgBoxStyle.Information, "OK")
+        p.FileName = "adb.exe"
+        Dim arg As String = ofd1.FileName
+        p.Arguments = "install " + """" + arg + """"
+        p.WindowStyle = ProcessWindowStyle.Normal
+        Process.Start(p)
+endInstall:
+    End Sub
+
+    Private Sub Button31_Click(sender As Object, e As EventArgs) Handles Button31.Click
+        sfd1.ShowDialog()
+        If sfd1.FileName = "" Then
+
+        Else
+            TextBox7.AppendText("File Saved at: " & DateTime.Now)
+            My.Computer.FileSystem.WriteAllText(sfd1.FileName, TextBox7.Text, False)
+
+        End If
+    End Sub
+
+    Private Sub Button32_Click(sender As Object, e As EventArgs) Handles Button32.Click
+        Try
+
+            MyProcess2.Kill()
+            MyProcess2.Dispose()
+            Dim proc = Process.GetProcessesByName("adb")
+            For i As Integer = 0 To proc.Count - 1
+                proc(i).Kill()
+            Next i
+        Catch ex As Exception
+
+        End Try
+
+
+
+    End Sub
+
+    Private Sub Button33_Click(sender As Object, e As EventArgs) Handles Button33.Click
+        TextBox7.Clear()
+        StartLogcat()
     End Sub
 End Class

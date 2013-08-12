@@ -216,6 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\32.gif" />
+    <None Include="Resources\btn_donateCC_LG.gif" />
     <Content Include="Visualpharm-Icons8-Metro-Style-Cell-Phones-Android.ico" />
   </ItemGroup>
   <ItemGroup>

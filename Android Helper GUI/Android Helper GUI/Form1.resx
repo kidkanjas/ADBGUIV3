@@ -140,6 +140,11 @@ By typing the following and checking the box you agree that any
 unwanted affects are of your own fault:
 devmode9184</value>
   </data>
+  <data name="Label34.Text" xml:space="preserve">
+    <value>&gt; Some Samsung Devices are known to have issues with this application.
+&gt; Some HTC Devices may ignore commands sent from this device, unlocking and rooting may solve this problem.
+&gt; Not all commands are universial.</value>
+  </data>
   <metadata name="ofd1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>143, 15</value>
   </metadata>
