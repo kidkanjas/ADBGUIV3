@@ -11,8 +11,8 @@ Public Class Form1
     Private Delegate Sub AppendOutputText2Delegate(ByVal text As String)
     Private WithEvents m_MediaConnectWatcher As ManagementEventWatcher
     Dim serial As String
-    Dim verint As Integer = 42
-    Dim VerString As String = "3.5.2"
+    Dim verint As Integer = 43
+    Dim VerString As String = "3.6.1"
     Private Sub ExiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExiToolStripMenuItem.Click
         End
 
@@ -466,6 +466,7 @@ finStart:
         End Select
     End Sub
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+
         If BackgroundWorker3.IsBusy = True Then
             'android.Dispose()
             'BackgroundWorker3.CancelAsync()
@@ -549,9 +550,7 @@ finStart:
     End Sub
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
         Try
-            TextBox7.Clear()
-            MyProcess2.Kill()
-            MyProcess2.Dispose()
+            Button32.PerformClick()
 
         Catch ex As Exception
             GoTo continue1
@@ -663,43 +662,51 @@ continue1:
 
     Private Sub BackgroundWorker3_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker3.DoWork
         Try
-            TextBox7.Clear()
-            MyProcess2.Kill()
-            MyProcess2.Dispose()
+Button32.PerformClick()
 
         Catch ex As Exception
             GoTo continue1
         End Try
 continue1:
-        Button14.Enabled = False
-        PictureBox1.Visible = True
-        Label14.Text = "Checking for a connected device..."
-        Label14.Visible = True
-        Dim serial As String
-        android = AndroidController.Instance
-        android.UpdateDeviceList()
-        If android.HasConnectedDevices Then
-            serial = android.ConnectedDevices(0)
-            device = android.GetConnectedDevice(serial)
-            Label7.Text = serial.ToUpper
-            Label7.Text.ToUpper()
-            Label9.Text = "Battery Level: " + device.Battery.Level.ToString
-            If device.HasRoot = True Then
-                Label10.Text = "SU Version: " + device.Su.Version.ToString
+        Try
+            Button14.Enabled = False
+            PictureBox1.Visible = True
+            Label14.Text = "Checking for a connected device..."
+            Label14.Visible = True
+            Dim serial As String
+            android = AndroidController.Instance
+            android.UpdateDeviceList()
+            If android.HasConnectedDevices Then
+                serial = android.ConnectedDevices(0)
+                device = android.GetConnectedDevice(serial)
+                Label7.Text = serial.ToUpper
+                Label7.Text.ToUpper()
+                Label9.Text = "Battery Level: " + device.Battery.Level.ToString
+                If device.HasRoot = True Then
+                    Label10.Text = "SU Version: " + device.Su.Version.ToString
+                Else
+                    Label10.Text = "No su binary found!"
+                End If
+                Label11.Text = "Device State: " + device.State.ToString
+                Label12.Text = "Device Serial: " + serial
+                If device.BusyBox.Version = "" Then
+                    Label15.Text = "BusyBox Version: No BusyBox Found!!"
+                Else
+                    Label15.Text = "BusyBox Version: " + device.BusyBox.Version
+                End If
             Else
-                Label10.Text = "No su binary found!"
-            End If
-            Label11.Text = "Device State: " + device.State.ToString
-            Label12.Text = "Device Serial: " + serial
-            If device.BusyBox.Version = "" Then
-                Label15.Text = "BusyBox Version: No BusyBox Found!!"
-            Else
-                Label15.Text = "BusyBox Version: " + device.BusyBox.Version
+                'MsgBox("No device found! Drivers may need to be installed first, or the device is not plugged in!", MsgBoxStyle.Critical, "Device not found!")
+                Label7.Text = "No Devices Found!"
+                Label29.Text = "No Devies Connected!"
             End If
             If DeviceState.RECOVERY = True Then
                 MsgBox("Connected device has been detected in recovery mode! Some commands may not work!", MsgBoxStyle.Critical, "Recovery Detected!")
 
             End If
+        Catch ex As Exception
+            MsgBox("Error finding a device: " & ex.Message)
+        End Try
+      
             Try
                 If android.HasConnectedDevices Then
                     serial = android.ConnectedDevices(0)
@@ -717,11 +724,7 @@ continue1:
 
             End Try
 
-        Else
-            'MsgBox("No device found! Drivers may need to be installed first, or the device is not plugged in!", MsgBoxStyle.Critical, "Device not found!")
-            Label7.Text = "No Devices Found!"
-            Label29.Text = "No Devies Connected!"
-        End If
+
 
         If Label7.Text = "No Devices Found!" Then
             Label9.Text = "No devices connected!"
